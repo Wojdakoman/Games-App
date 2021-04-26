@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750219839392",
+    "firebase_url": "https://gameapp-e7840-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gameapp-e7840",
+    "storage_bucket": "gameapp-e7840.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750219839392:android:d26b0ec1e2ac58d23646c5",
+        "android_client_info": {
+          "package_name": "com.example.gameapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750219839392-ee2huuvafihbfu4mi041bh7c8q9rv3b0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKAQyhGN45MEbELyB5A2J7JeMyzZOR0U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750219839392-ee2huuvafihbfu4mi041bh7c8q9rv3b0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
