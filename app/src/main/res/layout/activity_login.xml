@@ -21,16 +21,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zaloguj"
+            android:text="@string/signIn"
             android:textSize="24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:hint="Login">
+            app:errorEnabled="true"
+            android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUserLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"/>
@@ -40,9 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:hint="Hasło">
+            app:errorEnabled="true"
+            android:hint="@string/password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUserPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"/>
@@ -58,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="Zaloguj" />
+                android:text="@string/signIn" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"

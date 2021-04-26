@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GameApp</string>
+    <string name="signIn">Zaloguj</string>
+    <string name="email">Email</string>
+    <string name="password">Hasło</string>
+    <string name="inputBlank">Pole nie może być puste</string>
 </resources>
