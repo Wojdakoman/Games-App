@@ -1,5 +1,6 @@
 package com.example.gameapp.views.loginFragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.example.gameapp.R
+import com.example.gameapp.views.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -64,7 +66,7 @@ class LoginFragment : Fragment() {
     private fun login(login: String, pass: String){
         auth.signInWithEmailAndPassword(login, pass).addOnCompleteListener(requireActivity()) {
             if(it.isSuccessful){
-                Toast.makeText(context, "Zalogowano!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(context, MainActivity::class.java))
             } else {
                 var msg = ""
                 when(it.exception){
