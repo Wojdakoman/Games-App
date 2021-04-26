@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.loginFragments.LoginFragment">
+    tools:context=".views.loginFragments.SignUpFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,8 +21,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signIn"
             android:layout_marginBottom="16dp"
+            android:text="@string/signUp"
             android:textSize="24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,18 +53,32 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signIn" />
+            android:layout_margin="4dp"
+            app:errorEnabled="true"
+            android:hint="@string/confirmPassword">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUserPass2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
+            android:text="@string/signUp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/createAccount" />
+            android:text="@string/goBack" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
