@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.gameapp.R
 import com.example.gameapp.viewmodels.GamesViewModel
+import com.example.gameapp.viewmodels.SharedViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
     private lateinit var viewModel: GamesViewModel
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var auth: FirebaseAuth
     private lateinit var preferences: SharedPreferences
 
@@ -40,9 +43,9 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GamesViewModel::class.java)
         preferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
 
-        viewModel.loadAccessToken(preferences?.getString("access_token", ""))
+        sharedViewModel.loadAccessToken(preferences?.getString("access_token", ""))
 
-        viewModel.token.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.token.observe(viewLifecycleOwner, Observer {
             if(preferences != null){
                 Log.d("[SAVE]", "token: $it")
                 with(preferences.edit()){

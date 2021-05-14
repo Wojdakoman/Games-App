@@ -10,9 +10,9 @@ import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "https://id.twitch.tv/oauth2/"
-const val CLIENT_ID = "ojpwo04xemos2tfjo6fnswjnyihlcw"
-const val CLIENT_SECRET = "5wn77ivxquw7j9i4kcrxgjwfng5as7"
-const val API = "?client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=client_credentials"
+private const val CLIENT_ID = "ojpwo04xemos2tfjo6fnswjnyihlcw"
+private const val CLIENT_SECRET = "5wn77ivxquw7j9i4kcrxgjwfng5as7"
+private const val API = "?client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=client_credentials"
 
 interface TwitchAPI {
     @POST("token$API")
