@@ -29,8 +29,12 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.repository = sharedViewModel.repository
 
-        viewModel.getCover().observe(viewLifecycleOwner, Observer {
-            Log.d("[COVER]", "cover: $it")
+        viewModel.game.observe(viewLifecycleOwner, Observer {
+            viewModel.getGameDetails()
+            gameTitle.text = it.name
+        })
+
+        viewModel.cover.observe(viewLifecycleOwner, Observer {
             bindImage(coverImage, viewModel.getCoverUrl(it))
         })
 
@@ -40,5 +44,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.changeGame(1981)
     }
 }

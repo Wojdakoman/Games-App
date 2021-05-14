@@ -6,18 +6,25 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gameapp.models.GamesRepository
+import com.example.gameapp.models.entities.Game
 import kotlinx.coroutines.launch
 
 class GameViewModel(application: Application): AndroidViewModel(application) {
     lateinit var repository: GamesRepository
 
-    fun getCover(): MutableLiveData<String>{
-        var coverID = MutableLiveData<String>()
+    val game = MutableLiveData<Game>()
+    val cover = MutableLiveData<String>()
+
+    fun changeGame(id: Int){
         viewModelScope.launch {
-            coverID.postValue(repository?.getCover(1981)[0].image_id)
-            //Log.d("[LOOP]", "asd ${repository.getCover(1981)}")
+            game.postValue(repository?.getGame(id)[0])
         }
-        return  coverID
+    }
+
+    fun getGameDetails(){
+        viewModelScope.launch {
+            cover.postValue(repository?.getCover(game.value?.id!!)[0].image_id)
+        }
     }
 
     fun getCoverUrl(id: String) = "https://images.igdb.com/igdb/image/upload/t_720p/$id.jpg"

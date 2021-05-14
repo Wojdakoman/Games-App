@@ -2,6 +2,7 @@ package com.example.gameapp.models.api
 
 import com.example.gameapp.models.entities.Cover
 import com.example.gameapp.models.entities.Covers
+import com.example.gameapp.models.entities.Game
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -17,6 +18,10 @@ interface  GamesAPI {
     @Headers("Client-ID: $CLIENT_ID")
     @POST("covers")
     suspend fun getCover(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("games")
+    suspend fun getGame(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Game>>
 
     companion object {
         operator fun invoke(): GamesAPI {

@@ -15,6 +15,11 @@ class GamesRepository(
         TwitchAPI().getAccessToken()
     }
 
+    suspend fun getGame(gameID: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = $gameID;")
+        GamesAPI().getGame(body, "Bearer $ACCESS_TOKEN")
+    }
+
     suspend fun getCover(gameID: Int) = apiRequest {
         var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where game = $gameID;")
         GamesAPI().getCover(body, "Bearer $ACCESS_TOKEN")
