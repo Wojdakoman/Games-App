@@ -23,6 +23,11 @@ class GamesRepository(
         GamesAPI().getGame(body, access)
     }
 
+    suspend fun search(query: String) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; search \"$query\";")
+        GamesAPI().getGame(body, access)
+    }
+
     suspend fun getCover(gameID: Int) = apiRequest {
         var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where game = $gameID;")
         GamesAPI().getCover(body, access)

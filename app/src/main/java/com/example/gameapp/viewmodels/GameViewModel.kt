@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.gameapp.models.GamesRepository
 import com.example.gameapp.models.entities.Game
+import com.example.gameapp.models.entities.SearchResult
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -16,6 +17,7 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val game = MutableLiveData<Game>()
     val cover = MutableLiveData<String>()
     val background = MutableLiveData<String>()
+    val searchResults = MutableLiveData<List<SearchResult>>()
 
     fun changeGame(id: Int){
         viewModelScope.launch {
@@ -29,6 +31,16 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             if(game.value?.artworks != null){
                 background.postValue(repository?.getArtwork(game.value?.artworks!![Random.nextInt(0, game.value?.artworks!!.size)])[0].image_id)
             } else background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
+        }
+    }
+
+    fun search(query: String){
+        viewModelScope.launch {
+            val results = mutableListOf<SearchResult>()
+            for(game in repository?.search(query)){
+                results.add(SearchResult(game.name, repository?.getCover(game.id)[0].image_id))
+            }
+            searchResults.postValue(results)
         }
     }
 

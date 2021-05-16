@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.gameapp.R
 import com.example.gameapp.viewmodels.GamesViewModel
 import com.example.gameapp.viewmodels.SharedViewModel
@@ -79,6 +80,8 @@ class MainFragment : Fragment() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d("[SEARCH]", "typed: $query")
+                val action = MainFragmentDirections.actionMainFragmentToSearchResultsFragment(query!!)
+                view?.findNavController()?.navigate(action)
                 return false
             }
 
