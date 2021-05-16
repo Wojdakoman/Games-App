@@ -30,7 +30,8 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             cover.postValue(repository?.getCover(game.value?.id!!)[0].image_id)
             if(game.value?.artworks != null){
                 background.postValue(repository?.getArtwork(game.value?.artworks!![Random.nextInt(0, game.value?.artworks!!.size)])[0].image_id)
-            } else background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
+            } else if(game.value?.screenshots != null)
+                background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
         }
     }
 

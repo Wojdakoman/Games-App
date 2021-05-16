@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.gameapp.R
 import com.example.gameapp.models.bindImage
 import com.example.gameapp.viewmodels.GameViewModel
@@ -19,6 +20,8 @@ import kotlinx.android.synthetic.main.fragment_game.*
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
+
+    private val args: GameFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +45,13 @@ class GameFragment : Fragment() {
             bindImage(backgroundImage, viewModel.getCoverUrl(it))
         })
 
+        viewModel.changeGame(args.gameID)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.changeGame(1981)
     }
 }
