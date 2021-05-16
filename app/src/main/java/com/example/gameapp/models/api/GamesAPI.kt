@@ -23,6 +23,14 @@ interface  GamesAPI {
     @POST("games")
     suspend fun getGame(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Game>>
 
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("artworks")
+    suspend fun getArtwork(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("screenshots")
+    suspend fun getScreen(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
+
     companion object {
         operator fun invoke(): GamesAPI {
             val client = OkHttpClient.Builder().connectTimeout(1, TimeUnit.MINUTES).build()

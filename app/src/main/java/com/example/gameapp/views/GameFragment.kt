@@ -37,6 +37,10 @@ class GameFragment : Fragment() {
         viewModel.cover.observe(viewLifecycleOwner, Observer {
             bindImage(coverImage, viewModel.getCoverUrl(it))
         })
+        
+        viewModel.background.observe(viewLifecycleOwner, Observer {
+            bindImage(backgroundImage, viewModel.getCoverUrl(it))
+        })
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game, container, false)

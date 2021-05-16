@@ -8,12 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.gameapp.models.GamesRepository
 import com.example.gameapp.models.entities.Game
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class GameViewModel(application: Application): AndroidViewModel(application) {
     lateinit var repository: GamesRepository
 
     val game = MutableLiveData<Game>()
     val cover = MutableLiveData<String>()
+    val background = MutableLiveData<String>()
 
     fun changeGame(id: Int){
         viewModelScope.launch {
@@ -24,6 +26,9 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     fun getGameDetails(){
         viewModelScope.launch {
             cover.postValue(repository?.getCover(game.value?.id!!)[0].image_id)
+            if(game.value?.artworks != null){
+                background.postValue(repository?.getArtwork(game.value?.artworks!![Random.nextInt(0, game.value?.artworks!!.size)])[0].image_id)
+            } else background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
         }
     }
 
