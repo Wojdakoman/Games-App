@@ -35,7 +35,6 @@ class SearchResultsFragment : Fragment() {
         fragmentLayoutManager = LinearLayoutManager(context)
         searchResultsAdapter = SearchResultsAdapter(viewModel)
 
-        Log.d("[SEARCHING]", "qrg: ${args.searchQuery}")
         viewModel.search(args.searchQuery)
 
         viewModel.searchResults.observe(viewLifecycleOwner, Observer {

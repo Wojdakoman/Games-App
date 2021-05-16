@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_gameFragment_to_searchResultsFragment"
             app:destination="@id/searchResultsFragment" />
+        <argument
+            android:name="gameID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchResultsFragment"

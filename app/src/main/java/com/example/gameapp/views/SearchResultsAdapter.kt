@@ -3,6 +3,7 @@ package com.example.gameapp.views
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gameapp.R
 import com.example.gameapp.models.bindImage
@@ -23,6 +24,11 @@ class SearchResultsAdapter(private val viewModel: GameViewModel): RecyclerView.A
     override fun onBindViewHolder(holder: Holder, position: Int) {
         bindImage(holder.itemView.gameCover, viewModel.getCoverUrl(list[position].cover))
         holder.itemView.gameName.text = list[position].name
+
+        holder.itemView.setOnClickListener {
+            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToGameFragment(list[position].id)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount() = list.size

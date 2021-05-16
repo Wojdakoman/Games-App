@@ -79,14 +79,13 @@ class MainFragment : Fragment() {
         //search view handler
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d("[SEARCH]", "typed: $query")
                 val action = MainFragmentDirections.actionMainFragmentToSearchResultsFragment(query!!)
                 view?.findNavController()?.navigate(action)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("[STYPE]", "$newText")
+                //Log.d("[STYPE]", "$newText")
                 return false
             }
         })

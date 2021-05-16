@@ -38,7 +38,8 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val results = mutableListOf<SearchResult>()
             for(game in repository?.search(query)){
-                results.add(SearchResult(game.name, repository?.getCover(game.id)[0].image_id))
+                val gCover = repository?.getCover(game.id)
+                results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null"))
             }
             searchResults.postValue(results)
         }
