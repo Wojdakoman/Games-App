@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,21 +15,16 @@ import com.example.gameapp.models.bindImage
 import com.example.gameapp.viewmodels.GameViewModel
 import com.example.gameapp.viewmodels.GamesViewModel
 import com.example.gameapp.viewmodels.SharedViewModel
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_game.*
 
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
-    private lateinit var database: DatabaseReference
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val args: GameFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        database = Firebase.database.reference
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +32,7 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.repository = sharedViewModel.repository
 
-        viewModel.setDefaultState()
+        viewModel.setDefaultState(args.gameID)
 
         viewModel.game.observe(viewLifecycleOwner, Observer {
             viewModel.getGameDetails()

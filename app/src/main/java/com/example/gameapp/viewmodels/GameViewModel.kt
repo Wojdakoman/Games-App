@@ -5,14 +5,20 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.gameapp.models.FirebaseRepository
 import com.example.gameapp.models.GamesRepository
+import com.example.gameapp.models.entities.FirebaseGame
 import com.example.gameapp.models.entities.Game
 import com.example.gameapp.models.entities.SearchResult
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class GameViewModel(application: Application): AndroidViewModel(application) {
     lateinit var repository: GamesRepository
+    private val firebase = FirebaseRepository()
 
     val game = MutableLiveData<Game>()
     val cover = MutableLiveData<String>()
@@ -48,16 +54,24 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun setDefaultState(played: Boolean = false, fav: Boolean = false){
-        isPlayed.postValue(played)
-        isFav.postValue(fav)
+    fun setDefaultState(gameId: Int){
+        val responseP = firebase.wasGamePlayed(gameId.toString())
+        responseP.observeForever {
+            isPlayed.postValue(it)
+        }
+        val responseF = firebase.isGameFav(gameId.toString())
+        responseF.observeForever {
+            isFav.postValue(it)
+        }
     }
 
     fun playedClick(){
+        firebase.addGame(FirebaseGame(game.value!!.id, !isPlayed.value!!, isFav.value!!))
         isPlayed.postValue(!isPlayed.value!!)
     }
 
     fun favClick(){
+        firebase.addGame(FirebaseGame(game.value!!.id, isPlayed.value!!, !isFav.value!!))
         isFav.postValue(!isFav.value!!)
     }
 
