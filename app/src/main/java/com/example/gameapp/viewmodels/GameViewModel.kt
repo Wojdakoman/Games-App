@@ -26,9 +26,11 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val isPlayed = MutableLiveData<Boolean>()
     val isFav = MutableLiveData<Boolean>()
     val searchResults = MutableLiveData<List<SearchResult>>()
+    val showProgress = MutableLiveData<Boolean>()
 
     fun changeGame(id: Int){
         viewModelScope.launch {
+            showProgress.postValue(true)
             game.postValue(repository?.getGame(id)[0])
         }
     }
@@ -40,16 +42,19 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
                 background.postValue(repository?.getArtwork(game.value?.artworks!![Random.nextInt(0, game.value?.artworks!!.size)])[0].image_id)
             } else if(game.value?.screenshots != null)
                 background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
+            showProgress.postValue(false)
         }
     }
 
     fun search(query: String){
         viewModelScope.launch {
+            showProgress.postValue(true)
             val results = mutableListOf<SearchResult>()
             for(game in repository?.search(query)){
                 val gCover = repository?.getCover(game.id)
                 results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null"))
             }
+            showProgress.postValue(false)
             searchResults.postValue(results)
         }
     }

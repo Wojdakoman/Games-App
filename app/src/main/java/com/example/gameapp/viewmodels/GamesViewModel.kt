@@ -15,8 +15,6 @@ class GamesViewModel(application: Application): AndroidViewModel(application) {
     lateinit var repository: GamesRepository
     private val firebase = FirebaseRepository()
 
-    //val list = MutableLiveData<List<Int>>()
-
     fun getGames(){
         firebase.loadUserGames().observeForever{
             for(x in it)

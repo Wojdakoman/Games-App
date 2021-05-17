@@ -63,6 +63,13 @@ class GameFragment : Fragment() {
             }
         })
 
+        //show progress circle or not
+        viewModel.showProgress.observe(viewLifecycleOwner, Observer {
+            if(it)
+                progressCircle.visibility = View.VISIBLE
+            else progressCircle.visibility = View.GONE
+        })
+
         viewModel.changeGame(args.gameID)
 
         // Inflate the layout for this fragment

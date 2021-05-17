@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gameapp.R
 import com.example.gameapp.viewmodels.GameViewModel
 import com.example.gameapp.viewmodels.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.fragment_search_results.*
+import kotlinx.android.synthetic.main.fragment_search_results.progressCircle
 
 class SearchResultsFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
@@ -40,6 +42,13 @@ class SearchResultsFragment : Fragment() {
         viewModel.searchResults.observe(viewLifecycleOwner, Observer {
             searchResultsAdapter.setData(it)
             searchResultsAdapter.notifyDataSetChanged()
+        })
+
+        //show progress circle or not
+        viewModel.showProgress.observe(viewLifecycleOwner, Observer {
+            if(it)
+                progressCircle.visibility = View.VISIBLE
+            else progressCircle.visibility = View.GONE
         })
 
         // Inflate the layout for this fragment
