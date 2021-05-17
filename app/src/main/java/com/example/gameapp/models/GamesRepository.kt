@@ -5,6 +5,8 @@ import com.example.gameapp.models.api.SafeApiRequest
 import com.example.gameapp.models.api.TwitchAPI
 import okhttp3.MediaType
 import okhttp3.RequestBody
+import java.time.Instant
+import java.util.*
 
 class GamesRepository(
         private val gamesAPI: GamesAPI,
@@ -41,5 +43,21 @@ class GamesRepository(
     suspend fun getScreen(screen: Int) = apiRequest {
         var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = $screen;")
         GamesAPI().getScreen(body, access)
+    }
+
+    suspend fun getNewest() = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; sort first_release_date desc; where first_release_date != null & status = 0 & cover != null; limit 20;")
+        GamesAPI().getGame(body, access)
+    }
+
+    suspend fun getTheBest() = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; sort total_rating desc; where cover != null & total_rating != null; limit 20;")
+        GamesAPI().getGame(body, access)
+    }
+
+    suspend fun getComingSoon() = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"),
+            "fields *; sort first_release_date asc; where first_release_date != null & status = (2,3,4) & cover != null & first_release_date >= ${Instant.now().epochSecond};")
+        GamesAPI().getGame(body, access)
     }
 }
