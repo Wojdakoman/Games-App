@@ -1,15 +1,17 @@
 <resources>
     <string name="app_name">GameApp</string>
-    <string name="signIn">Zaloguj</string>
-    <string name="signUp">Zarejestruj</string>
+    <string name="signIn">Sign in</string>
+    <string name="signUp">Sign up</string>
     <string name="email">Email</string>
-    <string name="password">Hasło</string>
-    <string name="confirmPassword">Potwierdź hasło</string>
-    <string name="passwordDiffer">Podane hasła sa różne</string>
-    <string name="inputBlank">Pole nie może być puste</string>
-    <string name="goBack">Powrót</string>
-    <string name="createAccount">Utwórz nowe konto</string>
-    <string name="search">Szukaj</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="passwordDiffer">Given passwords differ</string>
+    <string name="inputBlank">This field is required</string>
+    <string name="goBack">Back</string>
+    <string name="createAccount">Create a new account</string>
+    <string name="search">Search</string>
+    <string name="favourite">Favourite games</string>
+    <string name="played">Finished games</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

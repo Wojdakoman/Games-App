@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainFragment_to_searchResultsFragment"
             app:destination="@id/searchResultsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gamesListFragment"
+            app:destination="@id/gamesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -30,6 +33,9 @@
         <argument
             android:name="gameID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_gameFragment_to_gamesListFragment"
+            app:destination="@id/gamesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultsFragment"
@@ -44,5 +50,26 @@
         <argument
             android:name="searchQuery"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_gamesListFragment"
+            app:destination="@id/gamesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamesListFragment"
+        android:name="com.example.gameapp.views.GamesListFragment"
+        android:label="fragment_games_list"
+        tools:layout="@layout/fragment_games_list" >
+        <action
+            android:id="@+id/action_gamesListFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gamesListFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+        <action
+            android:id="@+id/action_gamesListFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <argument
+            android:name="view"
+            app:argType="integer" />
     </fragment>
 </navigation>

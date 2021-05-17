@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/gameFragment"
+        android:id="@+id/gamesListFragment"
         android:enabled="true"
-        android:title="fav"/>
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/favourite"/>
+    <item
+        android:id="@+id/gamesListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_verified"
+        android:title="@string/played"
+        tools:ignore="DuplicateIds" />
 </menu>
