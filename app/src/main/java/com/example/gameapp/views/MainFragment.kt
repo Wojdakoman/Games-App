@@ -84,7 +84,6 @@ class MainFragment : Fragment() {
 
         //show progress circle or not
         viewModel.showProgress.observe(viewLifecycleOwner, Observer {
-            Log.d("[CIRCLE]", "s: $it")
             if(it)
                 progressCircle.visibility = View.VISIBLE
             else progressCircle.visibility = View.GONE

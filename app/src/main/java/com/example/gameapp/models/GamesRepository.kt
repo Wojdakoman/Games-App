@@ -65,4 +65,14 @@ class GamesRepository(
             "fields *; sort first_release_date asc; where first_release_date != null & status = (2,3,4) & cover != null & first_release_date >= ${Instant.now().epochSecond};")
         GamesAPI().getGame(body, access)
     }
+
+    suspend fun getPlatforms(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getPlatforms(body, access)
+    }
+
+    suspend fun getPlatformLogos(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getPlatformLogos(body, access)
+    }
 }

@@ -26,6 +26,7 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val isPlayed = MutableLiveData<Boolean>()
     val isFav = MutableLiveData<Boolean>()
     val searchResults = MutableLiveData<List<SearchResult>>()
+    val platforms = MutableLiveData<List<String>>()
     val showProgress = MutableLiveData<Boolean>()
     var listMode: Int = 0 //0 - fav list, 1 - played list, 2 - search list
     private var searchQuery = ""
@@ -40,10 +41,24 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     fun getGameDetails(){
         viewModelScope.launch {
             cover.postValue(repository?.getCover(game.value?.id!!)[0].image_id)
+            //background
             if(game.value?.artworks != null){
                 background.postValue(repository?.getArtwork(game.value?.artworks!![Random.nextInt(0, game.value?.artworks!!.size)])[0].image_id)
             } else if(game.value?.screenshots != null)
                 background.postValue(repository?.getScreen(game.value?.screenshots!![Random.nextInt(0, game.value?.screenshots!!.size)])[0].image_id)
+            //platforms
+            //   - get platforms objects
+            val platformsList = repository?.getPlatforms(game.value?.platforms?.joinToString(separator = ",")!!, game.value?.platforms?.size?:0)
+            //   - get platforms logos id
+            val platformsImages = mutableListOf<Int>()
+            for(platform in platformsList)
+                platformsImages.add(platform.platform_logo)
+            //   - get logos url
+            val logos = mutableListOf<String>()
+            for(image in repository?.getPlatformLogos(platformsImages.joinToString(separator = ","), platformsImages.size))
+                logos.add(image.image_id)
+            platforms.postValue(logos)
+
             showProgress.postValue(false)
         }
     }

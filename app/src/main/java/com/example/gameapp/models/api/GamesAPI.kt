@@ -3,6 +3,7 @@ package com.example.gameapp.models.api
 import com.example.gameapp.models.entities.Cover
 import com.example.gameapp.models.entities.Covers
 import com.example.gameapp.models.entities.Game
+import com.example.gameapp.models.entities.Platform
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -30,6 +31,14 @@ interface  GamesAPI {
     @Headers("Client-ID: $CLIENT_ID")
     @POST("screenshots")
     suspend fun getScreen(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("platforms")
+    suspend fun getPlatforms(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Platform>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("platform_logos")
+    suspend fun getPlatformLogos(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
 
     companion object {
         operator fun invoke(): GamesAPI {

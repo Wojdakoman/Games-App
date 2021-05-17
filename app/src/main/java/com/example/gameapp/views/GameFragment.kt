@@ -2,6 +2,7 @@ package com.example.gameapp.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gameapp.R
 import com.example.gameapp.models.bindImage
 import com.example.gameapp.viewmodels.GameViewModel
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_game.*
 
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
+    private lateinit var platformsAdapter: PlatformSliderAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val args: GameFragmentArgs by navArgs()
@@ -31,6 +34,8 @@ class GameFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.repository = sharedViewModel.repository
+
+        platformsAdapter = PlatformSliderAdapter()
 
         viewModel.setDefaultState(args.gameID)
 
@@ -62,6 +67,11 @@ class GameFragment : Fragment() {
                 favButton.setImageResource(R.drawable.ic_favorite_border)
             }
         })
+        
+        viewModel.platforms.observe(viewLifecycleOwner, Observer { 
+            platformsAdapter.list = it
+            platformsAdapter.notifyDataSetChanged()
+        })
 
         //show progress circle or not
         viewModel.showProgress.observe(viewLifecycleOwner, Observer {
@@ -84,6 +94,11 @@ class GameFragment : Fragment() {
         }
         favButton.setOnClickListener {
             viewModel.favClick()
+        }
+
+        platformsRecycler.apply {
+            adapter = platformsAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
