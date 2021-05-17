@@ -68,11 +68,10 @@ class LoginFragment : Fragment() {
             if(it.isSuccessful){
                 startActivity(Intent(context, MainActivity::class.java))
             } else {
-                var msg = ""
-                when(it.exception){
-                    is FirebaseAuthInvalidCredentialsException -> msg = "Podano nieprawidłowy login"
-                    is FirebaseAuthInvalidUserException -> msg = "Brak użytkownika"
-                    else -> msg = "unknown"
+                val msg = when(it.exception){
+                    is FirebaseAuthInvalidCredentialsException -> getString(R.string.wrongLoginPassword)
+                    is FirebaseAuthInvalidUserException -> getString(R.string.userNotFound)
+                    else -> "unknown"
                 }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }

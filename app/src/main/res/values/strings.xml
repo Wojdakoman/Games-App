@@ -9,6 +9,11 @@
     <string name="confirmPassword">Confirm password</string>
     <string name="passwordDiffer">Given passwords differ</string>
     <string name="inputBlank">This field is required</string>
+    <string name="wrongLoginPassword">Wrong email or password</string>
+    <string name="userNotFound">User can not be found</string>
+    <string name="userExists">This email is registered already</string>
+    <string name="emailAsALogin">Type correct email as a login</string>
+    <string name="weakPassword">Password is too weak</string>
     <string name="goBack">Back</string>
     <string name="createAccount">Create a new account</string>
     <string name="search">Search</string>

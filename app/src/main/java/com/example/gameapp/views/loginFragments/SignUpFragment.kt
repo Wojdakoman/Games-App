@@ -78,12 +78,11 @@ class SignUpFragment : Fragment() {
                 startActivity(Intent(context, MainActivity::class.java))
             } else {
                 Log.d("[LOG]", "er: ${it.exception}")
-                var msg = ""
-                when(it.exception){
-                    is FirebaseAuthWeakPasswordException-> msg = "Wybrane hasło jest za słabe"
-                    is FirebaseAuthInvalidCredentialsException -> msg = "Podaj email jako login"
-                    is FirebaseAuthUserCollisionException -> msg = "Konto już istnieje!"
-                    else -> msg = "unknown"
+                val msg = when(it.exception){
+                    is FirebaseAuthWeakPasswordException-> getString(R.string.weakPassword)
+                    is FirebaseAuthInvalidCredentialsException -> getString(R.string.emailAsALogin)
+                    is FirebaseAuthUserCollisionException -> getString(R.string.userExists)
+                    else -> "unknown"
                 }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
