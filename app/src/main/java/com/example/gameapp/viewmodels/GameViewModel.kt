@@ -17,6 +17,8 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val game = MutableLiveData<Game>()
     val cover = MutableLiveData<String>()
     val background = MutableLiveData<String>()
+    val isPlayed = MutableLiveData<Boolean>()
+    val isFav = MutableLiveData<Boolean>()
     val searchResults = MutableLiveData<List<SearchResult>>()
 
     fun changeGame(id: Int){
@@ -44,6 +46,19 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             }
             searchResults.postValue(results)
         }
+    }
+
+    fun setDefaultState(played: Boolean = false, fav: Boolean = false){
+        isPlayed.postValue(played)
+        isFav.postValue(fav)
+    }
+
+    fun playedClick(){
+        isPlayed.postValue(!isPlayed.value!!)
+    }
+
+    fun favClick(){
+        isFav.postValue(!isFav.value!!)
     }
 
     fun getCoverUrl(id: String) = "https://images.igdb.com/igdb/image/upload/t_720p/$id.jpg"
