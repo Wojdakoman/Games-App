@@ -35,6 +35,11 @@ class GamesRepository(
         GamesAPI().getCover(body, access)
     }
 
+    suspend fun getCovers(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getCover(body, access)
+    }
+
     suspend fun getArtwork(artwork: Int) = apiRequest {
         var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = $artwork;")
         GamesAPI().getArtwork(body, access)
