@@ -1,7 +1,6 @@
 package com.example.gameapp.views
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.gameapp.R
 import com.example.gameapp.models.bindImage
 import com.example.gameapp.viewmodels.GameViewModel
-import com.example.gameapp.viewmodels.GamesViewModel
 import com.example.gameapp.viewmodels.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_game.*
 

@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener {
             val args = Bundle()
             when(it.title){
-                getString(R.string.favourite) -> args.putInt("view", 0)
-                getString(R.string.played) -> args.putInt("view", 1)
+                getString(R.string.favourite) -> args.putInt("view", 1)
+                getString(R.string.played) -> args.putInt("view", 0)
             }
             navController.navigate(it.itemId, args)
             true

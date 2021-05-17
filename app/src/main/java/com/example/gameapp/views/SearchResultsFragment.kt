@@ -34,6 +34,8 @@ class SearchResultsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.repository = sharedViewModel.repository
 
+        viewModel.listMode = 2
+
         fragmentLayoutManager = LinearLayoutManager(context)
         searchResultsAdapter = SearchResultsAdapter(viewModel)
 

@@ -26,7 +26,10 @@ class SearchResultsAdapter(private val viewModel: GameViewModel): RecyclerView.A
         holder.itemView.gameName.text = list[position].name
 
         holder.itemView.setOnClickListener {
-            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToGameFragment(list[position].id)
+            val action = when(viewModel.listMode){
+                2 -> SearchResultsFragmentDirections.actionSearchResultsFragmentToGameFragment(list[position].id)
+                else -> GamesListFragmentDirections.actionGamesListFragmentToGameFragment(list[position].id)
+            }
             holder.itemView.findNavController().navigate(action)
         }
     }
