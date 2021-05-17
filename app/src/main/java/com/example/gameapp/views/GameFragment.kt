@@ -96,6 +96,7 @@ class GameFragment : Fragment() {
         //search view handler
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+                searchItem.collapseActionView()
                 val action = GameFragmentDirections.actionGameFragmentToSearchResultsFragment(query!!)
                 view?.findNavController()?.navigate(action)
                 return false

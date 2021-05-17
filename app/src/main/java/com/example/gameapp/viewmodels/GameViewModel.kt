@@ -28,6 +28,7 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val searchResults = MutableLiveData<List<SearchResult>>()
     val showProgress = MutableLiveData<Boolean>()
     var listMode: Int = 0 //0 - fav list, 1 - played list, 2 - search list
+    private var searchQuery = ""
 
     //method used in GameFragment
     fun changeGame(id: Int){
@@ -48,6 +49,8 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     }
     //method that performs searching
     fun search(query: String){
+        if(searchQuery == query) return //do not download the same data again
+        searchQuery = query
         viewModelScope.launch {
             showProgress.postValue(true)
             val results = mutableListOf<SearchResult>()

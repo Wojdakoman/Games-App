@@ -78,6 +78,7 @@ class SearchResultsFragment : Fragment() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.search(query!!)
+                searchItem.collapseActionView()
                 return false
             }
 
