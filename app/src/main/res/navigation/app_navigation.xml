@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_gameFragment_to_gamesListFragment"
             app:destination="@id/gamesListFragment" />
+        <argument
+            android:name="gameName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchResultsFragment"

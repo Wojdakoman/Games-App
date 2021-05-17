@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
+        //set up navigation
         navController = findNavController(R.id.fragment)
         bottom_navigation.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController)
-
+        //bottom navigation handler
         bottom_navigation.setOnNavigationItemSelectedListener {
             val args = Bundle()
             when(it.title){
@@ -40,6 +40,15 @@ class MainActivity : AppCompatActivity() {
             }
             navController.navigate(it.itemId, args)
             true
+        }
+        //toolbar titles handler
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            supportActionBar?.title = when(destination.id){
+                R.id.gameFragment -> arguments?.get("gameName").toString()
+                R.id.searchResultsFragment -> getString(R.string.searchResults)
+                R.id.gamesListFragment -> if(arguments?.get("view").toString().toInt() == 0) getString(R.string.played) else getString(R.string.favourite)
+                else -> getString(R.string.app_name)
+            }
         }
     }
 

@@ -1,14 +1,15 @@
 package com.example.gameapp.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gameapp.R
@@ -27,6 +28,7 @@ class GamesListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +65,38 @@ class GamesListFragment : Fragment() {
         gamesList.apply {
             adapter = searchResultsAdapter
             layoutManager = fragmentLayoutManager
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.topbar_menu, menu)
+
+        val searchItem = menu.findItem(R.id.btnSearch)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        //search view handler
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val action = GamesListFragmentDirections.actionGamesListFragmentToSearchResultsFragment(query!!)
+                view?.findNavController()?.navigate(action)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //Log.d("[STYPE]", "$newText")
+                return false
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.btnLogOut -> {
+                viewModel.firebase.logOut()
+                startActivity(Intent(context, LoginActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

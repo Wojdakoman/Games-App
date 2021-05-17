@@ -60,11 +60,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        btnSignOut.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(context, LoginActivity::class.java))
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -86,5 +81,16 @@ class MainFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.btnLogOut -> {
+                auth.signOut()
+                startActivity(Intent(context, LoginActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -18,7 +18,7 @@ import kotlin.random.Random
 
 class GameViewModel(application: Application): AndroidViewModel(application) {
     lateinit var repository: GamesRepository
-    private val firebase = FirebaseRepository()
+    val firebase = FirebaseRepository()
 
     val game = MutableLiveData<Game>()
     val cover = MutableLiveData<String>()

@@ -71,4 +71,6 @@ class FirebaseRepository {
         })
         return answer
     }
+
+    fun logOut() = auth.signOut()
 }

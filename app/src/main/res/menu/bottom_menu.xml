@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_favorite"
         android:title="@string/favourite"/>
     <item
+        android:id="@+id/mainFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_gamepad"
+        android:title="@string/discover" />
+    <item
         android:id="@+id/gamesListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_verified"

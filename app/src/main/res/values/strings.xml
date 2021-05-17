@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">GameApp</string>
+    <string name="app_name">Game App</string>
+    <string name="discover">Discover</string>
     <string name="signIn">Sign in</string>
     <string name="signUp">Sign up</string>
+    <string name="logout">Log out</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm password</string>
@@ -10,6 +12,7 @@
     <string name="goBack">Back</string>
     <string name="createAccount">Create a new account</string>
     <string name="search">Search</string>
+    <string name="searchResults">Search results</string>
     <string name="favourite">Favourite games</string>
     <string name="played">Finished games</string>
     <!-- TODO: Remove or change this placeholder text -->
