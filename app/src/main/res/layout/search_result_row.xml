@@ -25,6 +25,13 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/gameCreators"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14dp" />
     </LinearLayout>
 
 </LinearLayout>

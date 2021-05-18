@@ -78,6 +78,7 @@ class GameFragment : Fragment() {
         viewModel.creators.observe(viewLifecycleOwner, Observer {
             creatorsAdapter.list = it
             creatorsAdapter.notifyDataSetChanged()
+            if(it.isEmpty()) creatorsGroup.visibility = View.GONE
         })
 
         //show progress circle or not

@@ -93,7 +93,19 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             val results = mutableListOf<SearchResult>()
             for(game in repository?.search(query)){
                 val gCover = repository?.getCover(game.id)
-                results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null"))
+                //creators
+                //   - get involved companies objects
+                val invComp = repository?.getCreators(game.involved_companies.joinToString(separator = ",")!!, game.involved_companies.size)
+                //   - get companies objects
+                val companiesIds = mutableListOf<Int>()
+                for(comp in invComp)
+                    companiesIds.add(comp.company)
+                val companies = repository?.getCompany(companiesIds.joinToString(separator = ","), companiesIds.size)
+
+                var compNames = mutableListOf<String>()
+                for(comp in companies)
+                    compNames.add(comp.name)
+                results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null", compNames.joinToString(separator = ", ")))
             }
             showProgress.postValue(false)
             searchResults.postValue(results)
@@ -145,7 +157,7 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             for(id in ids){
                 val gCover = repository?.getCover(id)
                 val game = repository?.getGame(id)[0]
-                results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null"))
+                results.add(SearchResult(game.id, game.name, if(gCover.isNotEmpty()) gCover[0].image_id else "null", "null"))
             }
             searchResults.postValue(results)
             showProgress.postValue(false)

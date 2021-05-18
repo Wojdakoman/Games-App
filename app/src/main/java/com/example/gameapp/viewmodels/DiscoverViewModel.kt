@@ -23,7 +23,7 @@ class DiscoverViewModel(application: Application): AndroidViewModel(application)
             val coversIds = mutableListOf<Int>()
             for(game in repository?.getNewest()){
                 coversIds.add(game.cover)
-                results.add(SearchResult(game.id, game.name, "null"))
+                results.add(SearchResult(game.id, game.name, "null", "null"))
             }
 
             for(cover in repository?.getCovers(coversIds.joinToString(separator = ","), coversIds.size)){
@@ -42,7 +42,7 @@ class DiscoverViewModel(application: Application): AndroidViewModel(application)
             val coversIds = mutableListOf<Int>()
             for(game in repository?.getTheBest()){
                 coversIds.add(game.cover)
-                results.add(SearchResult(game.id, game.name, "null"))
+                results.add(SearchResult(game.id, game.name, "null", "null"))
             }
 
             for(cover in repository?.getCovers(coversIds.joinToString(separator = ","), coversIds.size)){
@@ -61,7 +61,7 @@ class DiscoverViewModel(application: Application): AndroidViewModel(application)
             val coversIds = mutableListOf<Int>()
             for(game in repository?.getComingSoon()){
                 coversIds.add(game.cover)
-                results.add(SearchResult(game.id, game.name, "null"))
+                results.add(SearchResult(game.id, game.name, "null", "null"))
             }
 
             for(cover in repository?.getCovers(coversIds.joinToString(separator = ","), coversIds.size)){

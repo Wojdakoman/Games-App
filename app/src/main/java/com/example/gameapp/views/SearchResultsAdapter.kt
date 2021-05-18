@@ -24,6 +24,9 @@ class SearchResultsAdapter(private val viewModel: GameViewModel): RecyclerView.A
     override fun onBindViewHolder(holder: Holder, position: Int) {
         bindImage(holder.itemView.gameCover, viewModel.getCoverUrl(list[position].cover))
         holder.itemView.gameName.text = list[position].name
+        if(list[position].creators == "null")
+            holder.itemView.gameCreators.visibility = View.GONE
+        else holder.itemView.gameCreators.text = list[position].creators
 
         holder.itemView.setOnClickListener {
             val action = when(viewModel.listMode){
