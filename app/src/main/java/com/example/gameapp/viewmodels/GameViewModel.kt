@@ -144,7 +144,8 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
             for(x in it)
                 if(x.second == 0 || x.second == listMode+1){
                     list.add(x.first)
-                    Log.d("[Add]", "id: ${x.first}")
+                } else if(x.second == 3){
+                    firebase.deleteGame(x.first.toString())
                 }
             loadGames(list)
         }

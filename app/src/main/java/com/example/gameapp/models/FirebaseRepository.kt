@@ -72,5 +72,9 @@ class FirebaseRepository {
         return answer
     }
 
+    fun deleteGame(gameId: String){
+        getAllUserGames().child(gameId).removeValue()
+    }
+
     fun logOut() = auth.signOut()
 }
