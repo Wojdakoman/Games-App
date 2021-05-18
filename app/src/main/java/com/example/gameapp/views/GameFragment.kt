@@ -44,6 +44,9 @@ class GameFragment : Fragment() {
         viewModel.game.observe(viewLifecycleOwner, Observer {
             viewModel.getGameDetails()
             gameTitle.text = it.name
+            if(it.summary.isNullOrBlank())
+                descGroup.visibility = View.GONE
+            else gameDesc.text = it.summary
         })
 
         viewModel.cover.observe(viewLifecycleOwner, Observer {

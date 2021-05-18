@@ -13,5 +13,6 @@ data class Game(
     val platforms: List<Int>,
     val total_rating: Double,
     val screenshots: List<Int>,
+    val summary: String,
     val similar_games: List<Int>
 )
