@@ -1,9 +1,6 @@
 package com.example.gameapp.models.api
 
-import com.example.gameapp.models.entities.Cover
-import com.example.gameapp.models.entities.Covers
-import com.example.gameapp.models.entities.Game
-import com.example.gameapp.models.entities.Platform
+import com.example.gameapp.models.entities.*
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -39,6 +36,18 @@ interface  GamesAPI {
     @Headers("Client-ID: $CLIENT_ID")
     @POST("platform_logos")
     suspend fun getPlatformLogos(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("involved_companies")
+    suspend fun getGamesCreators(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<InvCompany>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("companies")
+    suspend fun getCompanies(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Company>>
+
+    @Headers("Client-ID: $CLIENT_ID")
+    @POST("company_logos")
+    suspend fun getCompanyLogos(@Body body: RequestBody, @Header("Authorization") accessToken: String): Response<List<Cover>>
 
     companion object {
         operator fun invoke(): GamesAPI {

@@ -75,4 +75,19 @@ class GamesRepository(
         var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
         GamesAPI().getPlatformLogos(body, access)
     }
+
+    suspend fun getCreators(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getGamesCreators(body, access)
+    }
+
+    suspend fun getCompany(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getCompanies(body, access)
+    }
+
+    suspend fun getCompanyLogos(ids: String, n: Int) = apiRequest {
+        var body = RequestBody.create(MediaType.parse("text/*"), "fields *; where id = ($ids); limit $n;")
+        GamesAPI().getCompanyLogos(body, access)
+    }
 }

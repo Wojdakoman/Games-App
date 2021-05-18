@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_game.*
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var platformsAdapter: PlatformSliderAdapter
+    private lateinit var creatorsAdapter: PlatformSliderAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val args: GameFragmentArgs by navArgs()
@@ -36,6 +37,7 @@ class GameFragment : Fragment() {
         viewModel.repository = sharedViewModel.repository
 
         platformsAdapter = PlatformSliderAdapter()
+        creatorsAdapter = PlatformSliderAdapter()
 
         viewModel.setDefaultState(args.gameID)
 
@@ -73,6 +75,11 @@ class GameFragment : Fragment() {
             platformsAdapter.notifyDataSetChanged()
         })
 
+        viewModel.creators.observe(viewLifecycleOwner, Observer {
+            creatorsAdapter.list = it
+            creatorsAdapter.notifyDataSetChanged()
+        })
+
         //show progress circle or not
         viewModel.showProgress.observe(viewLifecycleOwner, Observer {
             if(it)
@@ -98,6 +105,11 @@ class GameFragment : Fragment() {
 
         platformsRecycler.apply {
             adapter = platformsAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
+        creatorsRecycler.apply {
+            adapter = creatorsAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
     }
