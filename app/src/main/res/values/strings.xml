@@ -25,6 +25,10 @@
     <string name="comingSoon">Coming soon</string>
     <string name="availablePlatforms">Available on platforms:</string>
     <string name="creators">Creators:</string>
+    <string name="resetPassword">Reset password</string>
+    <string name="cancel">Cancel</string>
+    <string name="passwordSend">Password reset successfully</string>
+    <string name="error">An error occurred. Try again</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

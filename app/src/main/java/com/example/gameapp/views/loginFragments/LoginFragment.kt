@@ -2,14 +2,19 @@ package com.example.gameapp.views.loginFragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.marginLeft
 import androidx.navigation.findNavController
 import com.example.gameapp.R
 import com.example.gameapp.views.MainActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -61,6 +66,10 @@ class LoginFragment : Fragment() {
         btnSignUp.setOnClickListener {
             view.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
+        //reset button
+        btnResetPassword.setOnClickListener {
+            showResetPassDialog()
+        }
     }
 
     private fun login(login: String, pass: String){
@@ -76,5 +85,28 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showResetPassDialog(){
+        val editText = TextInputEditText(requireContext())
+        editText.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.resetPassword))
+                .setMessage(getString(R.string.email))
+                .setView(editText)
+                .setNegativeButton(getString(R.string.cancel)){ dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(getString(R.string.resetPassword)){ dialog, which ->
+                    Firebase.auth.sendPasswordResetEmail(editText.text?.toString())
+                            .addOnCompleteListener { task ->
+                                if(task.isSuccessful)
+                                    Toast.makeText(requireContext(), getString(R.string.passwordSend), Toast.LENGTH_SHORT).show()
+                                else Toast.makeText(requireContext(), getString(R.string.error), Toast.LENGTH_SHORT).show()
+                            }
+                    dialog.dismiss()
+                }
+                .show()
     }
 }
