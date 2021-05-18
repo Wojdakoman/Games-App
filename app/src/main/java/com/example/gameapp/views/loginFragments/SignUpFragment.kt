@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.example.gameapp.R
 import com.example.gameapp.views.MainActivity
 import com.google.firebase.auth.*
@@ -69,6 +70,10 @@ class SignUpFragment : Fragment() {
             else txtUserLogin.error = null
 
             if(canProceed) signUp(login, pass)
+        }
+        //back btn
+        cancel_button.setOnClickListener {
+            view.findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
         }
     }
 
